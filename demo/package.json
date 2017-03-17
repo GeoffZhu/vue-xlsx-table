@@ -1,6 +1,6 @@
 {
-  "name": "vue-event-calendar-demo",
-  "description": "A simple calendar to mark events for Vue2 ",
+  "name": "vue-xlsx-table-demo",
+  "description": "View .xlsx file in browser for Vue2",
   "version": "1.0.0",
   "author": "Geoff <geoffzhu1992@gmail.com>",
   "private": true,
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue": "^2.1.0",
-    "vue-event-calendar": "^1.0.4"
+    "vue-xlsx-table": "^0.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

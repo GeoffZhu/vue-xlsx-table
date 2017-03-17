@@ -1,33 +1,17 @@
 <template>
   <div id="app">
-    <h1>vue-event-calendar</h1>
-    <h2 class="t-center">Defalut template</h2>
-    <vue-event-calendar :events="demoEvents"></vue-event-calendar>
-    <h2 class="t-center mt150">Custom template</h2>
-    <vue-event-calendar :events="demoEvents">
-      <template scope="props">
-        <div v-for="(event, index) in props.showEvents" class="event-item">
-          <!-- In here do whatever you want, make you owner event template -->
-          {{event}}
-        </div>
-      </template>
-    </vue-event-calendar>
+    <h1>Vue-xlsx-table</h1>
+    <vue-xlsx-table @on-click-ok="handleOk"></vue-xlsx-table>
   </div>
 </template>
 
 <script>
 export default {
   name: 'app',
-  data () {
-    return {
-      demoEvents: [{
-        date: '2016/12/15',
-        title: 'eat',
-        desc: 'longlonglong description'
-      },{
-        date: '2016/11/12',
-        title: 'this is a title'
-      }]
+  methods: {
+    handleOk (tableData) {
+      console.log(tableData)
+      window.alert(JSON.stringify(tableData))
     }
   }
 }

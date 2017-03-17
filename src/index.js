@@ -1,56 +1,20 @@
 'use strict'
 
-import vueEventCalendar from './vue-event-calendar.vue'
+import vueXlsxTable from './vue-xlsx-table.vue'
 
 function install (Vue, options = {}) {
-  const isVueNext = Vue.version.split('.')[0] === '2'
-  const inBrowser = typeof window !== 'undefined'
-  let dateObj = new Date()
-  const DEFAULT_OPTION = {
-    locale: 'zh', //en
-    color: ' #f29543'
+  const version = Vue.version.split('.')[0]
+  if (version !== '2') {
+    console.error('For Vue.js 2, Version not support.')
   }
-  let Calendar = {
+  const inBrowser = typeof window !== 'undefined'
+  const DEFAULT_OPTION = {
+    locale: 'zh' //en
+  }
+  let xlsx = {
     $vm: null,
     bindEventBus (vm) {
       this.$vm = vm
-    },
-    toDate (dateString) {
-      if (dateString === 'all') {
-        this.$vm.CALENDAR_EVENTS_DATA.params = {
-          curYear: dateObj.getFullYear(),
-          curMonth: dateObj.getMonth(),
-          curDate: dateObj.getDate(),
-          curEventsDate: 'all'
-        }
-      } else {
-        let dateArr = dateString.split('/')
-        dateArr = dateArr.map((item) => {
-          return parseInt(item, 10)
-        })
-        this.$vm.CALENDAR_EVENTS_DATA.params = {
-          curYear: dateArr[0],
-          curMonth: dateArr[1]-1,
-          curDate: dateArr[2],
-          curEventsDate: dateString
-        }
-      }
-    },
-    nextMonth () {
-      if (this.$vm.CALENDAR_EVENTS_DATA.params.curMonth < 11) {
-        this.$vm.CALENDAR_EVENTS_DATA.params.curMonth++
-      } else {
-        this.$vm.CALENDAR_EVENTS_DATA.params.curYear++
-        this.$vm.CALENDAR_EVENTS_DATA.params.curMonth = 0
-      }
-    },
-    preMonth () {
-      if (this.$vm.CALENDAR_EVENTS_DATA.params.curMonth > 0) {
-        this.$vm.CALENDAR_EVENTS_DATA.params.curMonth--
-      } else {
-        this.$vm.CALENDAR_EVENTS_DATA.params.curYear--
-        this.$vm.CALENDAR_EVENTS_DATA.params.curMonth = 11
-      }
     }
   }
 
@@ -61,23 +25,19 @@ function install (Vue, options = {}) {
       CALENDAR_EVENTS_DATA: {
         options: calendarOptions,
         params: {
-          curYear: dateObj.getFullYear(),
-          curMonth: dateObj.getMonth(),
-          curDate: dateObj.getDate(),
-          curEventsDate: 'all'
         }
       }
     }
   })
 
   if (inBrowser) {
-    window.VueCalendarBarEventBus = VueCalendarBarEventBus
-    Calendar.bindEventBus(VueCalendarBarEventBus)
+    // window.VueCalendarBarEventBus = VueCalendarBarEventBus
+    // Calendar.bindEventBus(VueCalendarBarEventBus)
   }
 
-  Vue.component('vue-event-calendar', vueEventCalendar)
+  Vue.component('vue-xlsx-table', vueXlsxTable)
 
-  Vue.prototype.$EventCalendar = Calendar
+  // Vue.prototype.$EventCalendar = Calendar
 }
 
 export default install

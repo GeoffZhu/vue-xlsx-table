@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import vueEventCalendar from '../src/'
-// import vueEventCalendar from '../dist'
+import vueXLSX from '../src/'
+// import vueXLSX from '../dist'
 // import '../dist/style.css'
-Vue.use(vueEventCalendar, {locale: 'es'})
+
+Vue.use(vueXLSX)
 
 new Vue({
   el: '#app',
