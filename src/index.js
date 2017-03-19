@@ -9,7 +9,7 @@ function install (Vue, options = {}) {
   }
   const inBrowser = typeof window !== 'undefined'
   const DEFAULT_OPTION = {
-    locale: 'zh' //en
+    rABS: true
   }
   let xlsx = {
     $vm: null,
@@ -18,12 +18,12 @@ function install (Vue, options = {}) {
     }
   }
 
-  const calendarOptions = Object.assign(DEFAULT_OPTION, options)
+  const xlsxOptions = Object.assign(DEFAULT_OPTION, options)
 
-  const VueCalendarBarEventBus = new Vue({
+  const xlsxEventBus = new Vue({
     data: {
-      CALENDAR_EVENTS_DATA: {
-        options: calendarOptions,
+      XLSX_EVENTS_DATA: {
+        options: xlsxOptions,
         params: {
         }
       }
@@ -31,13 +31,11 @@ function install (Vue, options = {}) {
   })
 
   if (inBrowser) {
-    // window.VueCalendarBarEventBus = VueCalendarBarEventBus
-    // Calendar.bindEventBus(VueCalendarBarEventBus)
+    window.xlsxEventBus = xlsxEventBus
+    xlsx.bindEventBus(xlsxEventBus)
   }
 
   Vue.component('vue-xlsx-table', vueXlsxTable)
-
-  // Vue.prototype.$EventCalendar = Calendar
 }
 
 export default install

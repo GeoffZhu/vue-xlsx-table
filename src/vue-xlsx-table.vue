@@ -1,22 +1,25 @@
 <template>
   <div class="vue-xlsx-container">
     <div class="xlsx-upload-wrapper">
-      <button type="button" class="xlsx-button" @click="handleUploadBtnClick">选取文件</button>
-      <input id="upload-input" type="file" accept=".xlsx" class="c-hide" @change="handkeFileChange">
+      <button type="button" class="xlsx-button" @click="handleUploadBtnClick">
+        <slot></slot>
+      </button>
+      <input id="upload-input" type="file" :accept="accept" class="c-hide" @change="handkeFileChange">
     </div>
-    <div class="aabbcc"></div>
     <div v-show="showDialog" class="xlsx-dialog-wrapper">
       <div class="xlsx-dialog-content">
         <div class="xlsx-dialog__header">
-          <span class="el-dialog__title">确认数据是否正确</span>
+          <span class="el-dialog__title">
+            <slot name="dialog-title">请确认 Excel 中的数据是否正确</slot>
+          </span>
         </div>
         <div class="xlsx-dialog__body">
           <xlsx-table :header="tableData.header" :body="tableData.body"></xlsx-table>
         </div>
         <div class="xlsx-dialog__footer">
           <span class="dialog-footer">
-            <button type="button" class="xlsx-button button-large button-primary mr20" @click="hadnleCancel">取消</button>
-            <button type="button" class="xlsx-button button-large" @click="handleOk">确定</button>
+            <button type="button" class="xlsx-button button-large button-primary mr20" @click="hadnleCancel"><slot name="dialog-cancel">取消</slot></button>
+            <button type="button" class="xlsx-button button-large" @click="handleOk"><slot name="dialog-ok">正确</slot></button>
           </span>
         </div>
       </div>
@@ -37,13 +40,23 @@ export default {
   data () {
     return {
       showDialog: false,
-      rABS: true,
       rawFile: null,
       workbook: null,
       tableData: {
         header: [],
         body: []
       }
+    }
+  },
+  props: {
+    accept: {
+      type: String,
+      default: '.xlsx, .xls'
+    }
+  },
+  computed: {
+    rABS () {
+      return window.xlsxEventBus.XLSX_EVENTS_DATA.options.rABS
     }
   },
   methods: {
@@ -54,10 +67,11 @@ export default {
       this.rawFile = e.target.files[0]
       this.fileConvertToWorkbook(this.rawFile)
         .then((workbook) => {
+          let xlsxArr = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
           this.workbook = workbook
           this.showDialog = true
           this.initTable(
-            this.xlsxArrToTableArr(XLSX.utils.sheet_to_json(workbook.Sheets.Sheet1))
+            this.xlsxArrToTableArr(xlsxArr)
           )
         })
         .catch((err) => {

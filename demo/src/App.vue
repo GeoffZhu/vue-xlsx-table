@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <h1>Vue-xlsx-table</h1>
-    <vue-xlsx-table @on-click-ok="handleOk"></vue-xlsx-table>
+    <vue-xlsx-table @on-click-ok="handleOk">
+      Select one file
+      <span slot="dialog-title">If all right?</span>
+      <span slot="dialog-ok">Ok</span>
+      <span slot="dialog-cancel">Cancel</span>
+    </vue-xlsx-table>
   </div>
 </template>
 
@@ -9,9 +14,9 @@
 export default {
   name: 'app',
   methods: {
-    handleOk (tableData) {
-      console.log(tableData)
-      window.alert(JSON.stringify(tableData))
+    handleOk (convertedData) {
+      console.log(convertedData)
+      window.alert(JSON.stringify(convertedData))
     }
   }
 }

@@ -1,3 +1,3 @@
-# vue-event-calendar
+# vue-xlsx-table
 
-> This is a demo for vue-event-calendar
+> This is a demo for vue-xlsx-table

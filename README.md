@@ -1,5 +1,12 @@
 # vue-xlsx-table
 
+> Not need upload, view xlsx or xls file in your browser, Supported by js-xlsx.
+> [Live Demo](http://geoffzhu.cn/vue-xlsx-table/)
+
+[![npm version](https://img.shields.io/npm/v/vue-xlsx-table.svg)](https://www.npmjs.com/package/vue-xlsx-table)
+
+[中文文档](https://github.com/GeoffZhu/vue-xlsx-table/blob/master/README.zh.md)
+
 ## Requirements
 - vue: ^2.0.0
 
@@ -15,7 +22,7 @@
 ```javascript
 import 'vue-xlsx-table/dist/style.css'
 import vueXlsxTable from 'vue-xlsx-table'
-Vue.use(vueXlsxTable)
+Vue.use(vueXlsxTable, {rABS: false}) //HTML5 FileReader API have two methods to read local file readAsBinaryString and readAsArrayBuffer, default rABS true
 ```
 
 #### file.vue
@@ -23,7 +30,7 @@ Vue.use(vueXlsxTable)
 ```vue
 <template>
   <div id="app">
-    <h1>vue-xlsx</h1>
+    <h1>vue-xlsx-table</h1>
     <vue-xlsx-table @on-click-ok="handleOk"></vue-xlsx-table>
   </div>
 </template>
@@ -32,8 +39,8 @@ Vue.use(vueXlsxTable)
 export default {
   name: 'app',
   methods: {
-    handleOk (data) {
-      console.log(data)
+    handleOk (convertedData) {
+      console.log(convertedData)
     }
   }
 }

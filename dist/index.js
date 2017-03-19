@@ -1944,7 +1944,7 @@ var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(17),
   /* template */
-  __webpack_require__(13),
+  __webpack_require__(12),
   /* scopeId */
   null,
   /* cssModules */
@@ -26303,7 +26303,7 @@ var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(16),
   /* template */
-  __webpack_require__(12),
+  __webpack_require__(13),
   /* scopeId */
   null,
   /* cssModules */
@@ -26319,22 +26319,6 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "xlsx-table-wrapper"
-  }, [_c('table', [_c('thead', [_c('tr', _vm._l((_vm.header), function(td) {
-    return _c('td', [_vm._v(_vm._s(td))])
-  }))]), _vm._v(" "), _c('tbody', _vm._l((_vm.body), function(row) {
-    return _c('tr', _vm._l((row), function(td) {
-      return _c('td', [_vm._v(_vm._s(td))])
-    }))
-  }))])])
-},staticRenderFns: []}
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
     staticClass: "vue-xlsx-container"
   }, [_c('div', {
     staticClass: "xlsx-upload-wrapper"
@@ -26346,7 +26330,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.handleUploadBtnClick
     }
-  }, [_vm._v("选取文件")]), _vm._v(" "), _c('input', {
+  }, [_vm._t("default")], 2), _vm._v(" "), _c('input', {
     staticClass: "c-hide",
     attrs: {
       "id": "upload-input",
@@ -26357,8 +26341,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "change": _vm.handkeFileChange
     }
   })]), _vm._v(" "), _c('div', {
-    staticClass: "aabbcc"
-  }), _vm._v(" "), _c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -26411,6 +26393,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "el-dialog__title"
   }, [_vm._v("确认数据是否正确")])])
 }]}
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "xlsx-table-wrapper"
+  }, [_c('table', [_c('thead', [_c('tr', _vm._l((_vm.header), function(td) {
+    return _c('td', [_vm._v(_vm._s(td))])
+  }))]), _vm._v(" "), _c('tbody', _vm._l((_vm.body), function(row) {
+    return _c('tr', _vm._l((row), function(td) {
+      return _c('td', [_vm._v(_vm._s(td))])
+    }))
+  }))])])
+},staticRenderFns: []}
 
 /***/ }),
 /* 14 */
@@ -26491,6 +26489,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_xlsx__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_xlsx_table_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_xlsx_table_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_xlsx_table_vue__);
+//
 //
 //
 //
