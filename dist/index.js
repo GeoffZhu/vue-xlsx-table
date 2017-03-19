@@ -26335,7 +26335,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "upload-input",
       "type": "file",
-      "accept": ".xlsx"
+      "accept": _vm.accept
     },
     on: {
       "change": _vm.handkeFileChange
@@ -26350,7 +26350,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "xlsx-dialog-wrapper"
   }, [_c('div', {
     staticClass: "xlsx-dialog-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_c('div', {
+    staticClass: "xlsx-dialog__header"
+  }, [_c('span', {
+    staticClass: "el-dialog__title"
+  }, [_vm._t("dialog-title", [_vm._v("请确认 Excel 中的数据是否正确")])], 2)]), _vm._v(" "), _c('div', {
     staticClass: "xlsx-dialog__body"
   }, [_c('xlsx-table', {
     attrs: {
@@ -26369,7 +26373,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.hadnleCancel
     }
-  }, [_vm._v("取消")]), _vm._v(" "), _c('button', {
+  }, [_vm._t("dialog-cancel", [_vm._v("取消")])], 2), _vm._v(" "), _c('button', {
     staticClass: "xlsx-button button-large",
     attrs: {
       "type": "button"
@@ -26377,7 +26381,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.handleOk
     }
-  }, [_vm._v("确定")])])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._t("dialog-ok", [_vm._v("正确")])], 2)])])])]), _vm._v(" "), _c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -26386,13 +26390,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "xlsx-dialog-modal"
   })])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "xlsx-dialog__header"
-  }, [_c('span', {
-    staticClass: "el-dialog__title"
-  }, [_vm._v("确认数据是否正确")])])
-}]}
+},staticRenderFns: []}
 
 /***/ }),
 /* 13 */
@@ -26517,6 +26515,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -26529,7 +26529,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       showDialog: false,
-      rABS: true,
       rawFile: null,
       workbook: null,
       tableData: {
@@ -26539,6 +26538,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
+  props: {
+    accept: {
+      type: String,
+      default: '.xlsx, .xls'
+    }
+  },
+  computed: {
+    rABS: function rABS() {
+      return window.xlsxEventBus.XLSX_EVENTS_DATA.options.rABS;
+    }
+  },
   methods: {
     handkeFileChange: function handkeFileChange(e) {
       var _this = this;
@@ -26548,9 +26558,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
       this.rawFile = e.target.files[0];
       this.fileConvertToWorkbook(this.rawFile).then(function (workbook) {
+        var xlsxArr = __WEBPACK_IMPORTED_MODULE_0_xlsx___default.a.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
         _this.workbook = workbook;
         _this.showDialog = true;
-        _this.initTable(_this.xlsxArrToTableArr(__WEBPACK_IMPORTED_MODULE_0_xlsx___default.a.utils.sheet_to_json(workbook.Sheets.Sheet1)));
+        _this.initTable(_this.xlsxArrToTableArr(xlsxArr));
       }).catch(function (err) {
         console.error(err);
       });
@@ -26681,7 +26692,7 @@ function install(Vue) {
   }
   var inBrowser = typeof window !== 'undefined';
   var DEFAULT_OPTION = {
-    locale: 'zh' //en
+    rABS: true
   };
   var xlsx = {
     $vm: null,
@@ -26690,25 +26701,23 @@ function install(Vue) {
     }
   };
 
-  var calendarOptions = Object.assign(DEFAULT_OPTION, options);
+  var xlsxOptions = Object.assign(DEFAULT_OPTION, options);
 
-  var VueCalendarBarEventBus = new Vue({
+  var xlsxEventBus = new Vue({
     data: {
-      CALENDAR_EVENTS_DATA: {
-        options: calendarOptions,
+      XLSX_EVENTS_DATA: {
+        options: xlsxOptions,
         params: {}
       }
     }
   });
 
   if (inBrowser) {
-    // window.VueCalendarBarEventBus = VueCalendarBarEventBus
-    // Calendar.bindEventBus(VueCalendarBarEventBus)
+    window.xlsxEventBus = xlsxEventBus;
+    xlsx.bindEventBus(xlsxEventBus);
   }
 
   Vue.component('vue-xlsx-table', __WEBPACK_IMPORTED_MODULE_0__vue_xlsx_table_vue___default.a);
-
-  // Vue.prototype.$EventCalendar = Calendar
 }
 
 /* harmony default export */ __webpack_exports__["default"] = install;

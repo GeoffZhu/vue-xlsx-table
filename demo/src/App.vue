@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h1>Vue-xlsx-table</h1>
+    <p>Not need upload, view xlsx or xls file in your browser, Supported by js-xlsx.</p>
     <vue-xlsx-table @on-click-ok="handleOk">
       Select one file
       <span slot="dialog-title">If all right?</span>
