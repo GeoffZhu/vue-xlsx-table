@@ -116,9 +116,24 @@ export default {
     },
     xlsxArrToTableArr (xlsxArr) {
       let tableArr = []
-      let tableHeader = Object.keys(xlsxArr[0])
+      let length = 0
+      let maxLength = 0
+      let maxLengthIndex = 0
+      xlsxArr.forEach((item, index) => {
+        length = Object.keys(item).length
+        if (maxLength < length) {
+          maxLength = length
+          maxLengthIndex = index
+        }
+      })
+      let tableHeader = Object.keys(xlsxArr[maxLengthIndex])
+      let rowItem = {}
       xlsxArr.forEach((item) => {
-        tableArr.push(Object.values(item))
+        rowItem = {}
+        for (let i = 0; i < maxLength; i++) {
+          rowItem[tableHeader[i]] = item[tableHeader[i]] || ''
+        }
+        tableArr.push(rowItem)
       })
       return {
         header: tableHeader,

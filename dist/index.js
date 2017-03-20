@@ -26608,9 +26608,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     xlsxArrToTableArr: function xlsxArrToTableArr(xlsxArr) {
       var tableArr = [];
-      var tableHeader = Object.keys(xlsxArr[0]);
+      var length = 0;
+      var maxLength = 0;
+      var maxLengthIndex = 0;
+      xlsxArr.forEach(function (item, index) {
+        length = Object.keys(item).length;
+        if (maxLength < length) {
+          maxLength = length;
+          maxLengthIndex = index;
+        }
+      });
+      var tableHeader = Object.keys(xlsxArr[maxLengthIndex]);
+      var rowItem = {};
       xlsxArr.forEach(function (item) {
-        tableArr.push(Object.values(item));
+        rowItem = {};
+        for (var i = 0; i < maxLength; i++) {
+          rowItem[tableHeader[i]] = item[tableHeader[i]] || '';
+        }
+        tableArr.push(rowItem);
       });
       return {
         header: tableHeader,
