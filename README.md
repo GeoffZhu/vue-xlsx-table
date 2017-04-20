@@ -22,7 +22,7 @@
 ```javascript
 import 'vue-xlsx-table/dist/style.css'
 import vueXlsxTable from 'vue-xlsx-table'
-Vue.use(vueXlsxTable, {rABS: false}) //HTML5 FileReader API have two methods to read local file readAsBinaryString and readAsArrayBuffer, default rABS true
+Vue.use(vueXlsxTable, {rABS: false}) //HTML5 FileReader API have two methods to read local file readAsBinaryString and readAsArrayBuffer, default rABS false
 ```
 
 #### file.vue

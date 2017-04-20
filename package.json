@@ -13,7 +13,7 @@
   },
   "main": "dist/index.js",
   "dependencies": {
-    "xlsx": "^0.9.3"
+    "xlsx": "^0.9.4"
   },
   "devDependencies": {
     "vue": "^2.0.0",

@@ -9,7 +9,7 @@ function install (Vue, options = {}) {
   }
   const inBrowser = typeof window !== 'undefined'
   const DEFAULT_OPTION = {
-    rABS: true
+    rABS: false
   }
   let xlsx = {
     $vm: null,
