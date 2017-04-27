@@ -1,7 +1,7 @@
 {
   "name": "vue-xlsx-table",
   "description": "View .xlsx file in browser for Vue2",
-  "version": "0.2.4",
+  "version": "1.2.7",
   "author": "geoffzhu <geoffzhu1992@gmail.com>",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
@@ -13,7 +13,7 @@
   },
   "main": "dist/index.js",
   "dependencies": {
-    "xlsx": "^0.9.4"
+    "xlsx": "^0.9.3"
   },
   "devDependencies": {
     "vue": "^2.0.0",

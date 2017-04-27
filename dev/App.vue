@@ -1,11 +1,8 @@
 <template>
   <div id="app">
     <h1>vue-xlsx-table</h1>
-    <vue-xlsx-table @on-click-ok="handleOk">
+    <vue-xlsx-table @on-select-file="handleSelectedFile">
       select one file
-      <span slot="dialog-title">If all right?</span>
-      <span slot="dialog-ok">Ok</span>
-      <span slot="dialog-cancel">Cancel</span>
     </vue-xlsx-table>
   </div>
 </template>
@@ -14,7 +11,7 @@
 export default {
   name: 'app',
   methods: {
-    handleOk (data) {
+    handleSelectedFile (data) {
       console.log(data)
     }
   }

@@ -1,45 +1,19 @@
 <template>
   <div class="vue-xlsx-container">
-    <div class="xlsx-upload-wrapper">
-      <button type="button" class="xlsx-button" @click="handleUploadBtnClick">
-        <slot></slot>
-      </button>
-      <input id="upload-input" type="file" :accept="accept" class="c-hide" @change="handkeFileChange">
-    </div>
-    <div v-show="showDialog" class="xlsx-dialog-wrapper">
-      <div class="xlsx-dialog-content">
-        <div class="xlsx-dialog__header">
-          <span class="el-dialog__title">
-            <slot name="dialog-title">请确认 Excel 中的数据是否正确</slot>
-          </span>
-        </div>
-        <div class="xlsx-dialog__body">
-          <xlsx-table :header="tableData.header" :body="tableData.body"></xlsx-table>
-        </div>
-        <div class="xlsx-dialog__footer">
-          <span class="dialog-footer">
-            <button type="button" class="xlsx-button button-large button-primary mr20" @click="hadnleCancel"><slot name="dialog-cancel">取消</slot></button>
-            <button type="button" class="xlsx-button button-large" @click="handleOk"><slot name="dialog-ok">正确</slot></button>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div v-show="showDialog" class="xlsx-dialog-modal"></div>
+    <button type="button" class="xlsx-button" @click="handleUploadBtnClick">
+      <slot></slot>
+    </button>
+    <input id="upload-input" type="file" :accept="accept" class="c-hide" @change="handkeFileChange">
   </div>
 </template>
 
 <script>
 import XLSX from 'xlsx'
-import XlsxTable from './components/xlsx-table.vue'
 
 export default {
   name: 'vue-xlsx-table',
-  components: {
-    XlsxTable
-  },
   data () {
     return {
-      showDialog: false,
       rawFile: null,
       workbook: null,
       tableData: {
@@ -69,7 +43,6 @@ export default {
         .then((workbook) => {
           let xlsxArr = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
           this.workbook = workbook
-          this.showDialog = true
           this.initTable(
             this.xlsxArrToTableArr(xlsxArr)
           )
@@ -155,8 +128,10 @@ export default {
     initTable ( {data, header} ) {
       this.tableData.header = header
       this.tableData.body = data
+      this.$emit('on-select-file', this.tableData)
     },
     handleUploadBtnClick () {
+      this.clearAllData()
       document.getElementById('upload-input').click()
     },
     clearAllData () {
@@ -167,15 +142,6 @@ export default {
       }
       this.rawFile = null
       this.workbook = null
-      this.showDialog = false
-    },
-    hadnleCancel () {
-      this.$emit('on-click-cancel', this.tableData)
-      this.clearAllData()
-    },
-    handleOk () {
-      this.$emit('on-click-ok', this.tableData)
-      this.clearAllData()
     }
   }
 }
@@ -194,74 +160,6 @@ export default {
   }
   .c-hide{
     display: none;
-  }
-  .xlsx-upload-wrapper {
-
-  }
-  .xlsx-dialog-wrapper {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow: auto;
-    margin: 0;
-    z-index: 2001;
-    .xlsx-dialog-content {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fff;
-      border-radius: 2px;
-      box-shadow: 0 1px 3px rgba(0,0,0,.3);
-      box-sizing: border-box;
-      margin-bottom: 50px;
-      top: 15%;
-      .xlsx-dialog__header{
-        padding: 20px 20px 0;
-        font-weight: bold;
-      }
-      .xlsx-dialog__body{
-        position: relative;
-        overflow: hidden;
-        padding: 30px 20px;
-        color: #48576a;
-      }
-      .xlsx-dialog__footer{
-        padding: 10px 20px 15px;
-        text-align: right;
-        box-sizing: border-box;
-      }
-    }
-  }
-  .xlsx-dialog-modal {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: .5;
-    background: #000;
-    z-index: 2000;
-  }
-  .xlsx-table-wrapper{
-    font-size: 13px;
-    width: 1000px;
-    table {
-      table-layout: fixed;
-      width: 100%;
-      text-align: center;
-      border-collapse: collapse;
-    }
-    thead {
-      font-weight: bold;
-      background-color: #eff2f7;
-    }
-    td {
-      border: 1px solid #8492a6;
-      padding: 5px 0;
-      word-wrap: break-word;
-    }
   }
 }
 .xlsx-button {
@@ -289,8 +187,5 @@ export default {
     border: 1px solid #bfcbd9;
     background-color: #fff;
   }
-}
-.mr20{
-  margin-right: 20px;
 }
 </style>

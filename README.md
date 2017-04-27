@@ -20,9 +20,8 @@
 #### main.js
 
 ```javascript
-import 'vue-xlsx-table/dist/style.css'
 import vueXlsxTable from 'vue-xlsx-table'
-Vue.use(vueXlsxTable, {rABS: false}) //HTML5 FileReader API have two methods to read local file readAsBinaryString and readAsArrayBuffer, default rABS false
+Vue.use(vueXlsxTable, {rABS: false}) //Browser FileReader API have two methods to read local file readAsBinaryString and readAsArrayBuffer, default rABS false
 ```
 
 #### file.vue
@@ -31,7 +30,7 @@ Vue.use(vueXlsxTable, {rABS: false}) //HTML5 FileReader API have two methods to 
 <template>
   <div id="app">
     <h1>vue-xlsx-table</h1>
-    <vue-xlsx-table @on-click-ok="handleOk"></vue-xlsx-table>
+    <vue-xlsx-table @on-select-file="handleSelectedFile"></vue-xlsx-table>
   </div>
 </template>
 
@@ -39,7 +38,7 @@ Vue.use(vueXlsxTable, {rABS: false}) //HTML5 FileReader API have two methods to 
 export default {
   name: 'app',
   methods: {
-    handleOk (convertedData) {
+    handleSelectedFile (convertedData) {
       console.log(convertedData)
     }
   }

@@ -1,6 +1,5 @@
 var path = require('path')
 var webpack = require('webpack')
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
   entry: './dev/main.js',
@@ -54,22 +53,12 @@ if (process.env.NODE_ENV === 'production') {
   module.exports.entry = './src/index.js'
 
   module.exports.output = {
-    path:'./dist',
+    path: path.resolve(__dirname, './dist'),
     filename:'index.js',
     library:'VueEventCalendar',
     libraryTarget: 'umd'
   }
   module.exports.devtool = '#source-map'
-  module.exports.module.rules[0].options.loaders = {
-    css: ExtractTextPlugin.extract({
-      loader: 'css-loader',
-      fallbackLoader: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
-    }),
-    less: ExtractTextPlugin.extract({
-      loader: 'css-loader!less-loader',
-      fallbackLoader: 'vue-style-loader'
-    })
-  }
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
@@ -78,7 +67,6 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    }),
-    new ExtractTextPlugin("style.css")
+    })
   ])
 }

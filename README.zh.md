@@ -18,9 +18,8 @@
 #### main.js
 
 ```javascript
-import 'vue-xlsx-table/dist/style.css'
 import vueXlsxTable from 'vue-xlsx-table'
-Vue.use(vueXlsxTable, {rABS: false}) //HTML5 FileReader API 有两个方法可以读取本地文件 readAsBinaryString 和 readAsArrayBuffer, 默认rABS为true，也就是使用readAsBinaryString
+Vue.use(vueXlsxTable, {rABS: false}) //浏览器的FileReader API 有两个方法可以读取本地文件 readAsBinaryString 和 readAsArrayBuffer, 默认rABS为false，也就是使用readAsArrayBuffer
 ```
 
 #### file.vue
@@ -29,7 +28,7 @@ Vue.use(vueXlsxTable, {rABS: false}) //HTML5 FileReader API 有两个方法可�
 <template>
   <div id="app">
     <h1>vue-xlsx-table</h1>
-    <vue-xlsx-table @on-click-ok="handleOk"></vue-xlsx-table>
+    <vue-xlsx-table @on-select-file="handleSelectedFile"></vue-xlsx-table>
   </div>
 </template>
 
@@ -37,7 +36,7 @@ Vue.use(vueXlsxTable, {rABS: false}) //HTML5 FileReader API 有两个方法可�
 export default {
   name: 'app',
   methods: {
-    handleOk (convertedData) {
+    handleSelectedFile (convertedData) {
       console.log(convertedData)
     }
   }

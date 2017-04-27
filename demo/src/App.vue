@@ -2,11 +2,8 @@
   <div id="app">
     <h1>Vue-xlsx-table</h1>
     <p>Not need upload, view xlsx or xls file in your browser, Supported by js-xlsx.</p>
-    <vue-xlsx-table @on-click-ok="handleOk">
+    <vue-xlsx-table @on-select-file="handleSelectedFile">
       Select one file
-      <span slot="dialog-title">If all right?</span>
-      <span slot="dialog-ok">Ok</span>
-      <span slot="dialog-cancel">Cancel</span>
     </vue-xlsx-table>
   </div>
 </template>
@@ -15,7 +12,7 @@
 export default {
   name: 'app',
   methods: {
-    handleOk (convertedData) {
+    handleSelectedFile (convertedData) {
       console.log(convertedData)
       window.alert(JSON.stringify(convertedData))
     }
