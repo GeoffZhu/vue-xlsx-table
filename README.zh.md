@@ -1,6 +1,6 @@
 # vue-xlsx-table
 
-> 无需上传，在浏览器中查看xlsx或xls表格，由js-xlsx驱动.
+> 无需上传，在浏览器中查看xlsx或xls表格，由[js-xlsx](https://github.com/SheetJS/js-xlsx)驱动.
 > [在线例子](http://geoffzhu.cn/vue-xlsx-table/)
 
 [![npm version](https://img.shields.io/npm/v/vue-xlsx-table.svg)](https://www.npmjs.com/package/vue-xlsx-table)

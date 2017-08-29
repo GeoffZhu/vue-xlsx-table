@@ -1,6 +1,6 @@
 # vue-xlsx-table
 
-> Not need upload, view xlsx or xls file in your browser, Supported by js-xlsx.
+> Not need upload, view xlsx or xls file in your browser, Supported by [js-xlsx](https://github.com/SheetJS/js-xlsx).
 > [Live Demo](http://geoffzhu.cn/vue-xlsx-table/)
 
 [![npm version](https://img.shields.io/npm/v/vue-xlsx-table.svg)](https://www.npmjs.com/package/vue-xlsx-table)
