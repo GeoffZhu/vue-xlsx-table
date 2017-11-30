@@ -3,7 +3,7 @@
     <button type="button" class="xlsx-button" @click="handleUploadBtnClick">
       <slot></slot>
     </button>
-    <input id="upload-input" type="file" :accept="accept" class="c-hide" @change="handkeFileChange">
+    <input :id="uploadInputId" type="file" :accept="accept" class="c-hide" @change="handkeFileChange">
   </div>
 </template>
 
@@ -19,7 +19,8 @@ export default {
       tableData: {
         header: [],
         body: []
-      }
+      },
+      uploadInputId: (new Date().getUTCMilliseconds())
     }
   },
   props: {
@@ -132,10 +133,10 @@ export default {
     },
     handleUploadBtnClick () {
       this.clearAllData()
-      document.getElementById('upload-input').click()
+      document.getElementById(this.uploadInputId).click()
     },
     clearAllData () {
-      document.getElementById('upload-input').value = null
+      document.getElementById(this.uploadInputId).value = null
       this.tableData = {
         header: [],
         body: []
