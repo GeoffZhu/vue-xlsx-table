@@ -1969,6 +1969,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     accept: {
       type: String,
       default: '.xlsx, .xls'
+    },
+    className: {
+      type: String,
+      default: 'xlsx-button'
     }
   },
   computed: {
@@ -2083,10 +2087,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     handleUploadBtnClick: function handleUploadBtnClick() {
       this.clearAllData();
-      document.getElementById(this.uploadInputId).click();
+      this.$refs[this.uploadInputId].click();
     },
     clearAllData: function clearAllData() {
-      document.getElementById(this.uploadInputId).value = null;
+      this.$refs[this.uploadInputId].value = null;
       this.tableData = {
         header: [],
         body: []
@@ -2285,7 +2289,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, ".vue-xlsx-container{display:inline-block}.vue-xlsx-container,.vue-xlsx-container *{margin:0;padding:0;box-sizing:border-box}.vue-xlsx-container .c-hide{display:none}.xlsx-button{display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;border:1px solid #20a0ff;-webkit-appearance:none;text-align:center;box-sizing:border-box;outline:0;margin:0;padding:7px 9px;font-size:12px;border-radius:4px;color:#fff;background-color:#20a0ff}.xlsx-button.button-large{padding:10px 15px;font-size:14px}.xlsx-button.button-primary{color:#1f2d3d;border:1px solid #bfcbd9;background-color:#fff}", ""]);
+exports.push([module.i, ".vue-xlsx-container{display:inline-block;margin:0;padding:0;box-sizing:border-box}.vue-xlsx-container .c-hide{margin:0;padding:0;box-sizing:border-box;display:none}.xlsx-button{display:inline-block;line-height:1;white-space:nowrap;cursor:pointer;border:1px solid #20a0ff;-webkit-appearance:none;text-align:center;box-sizing:border-box;outline:0;margin:0;padding:7px 9px;font-size:12px;border-radius:4px;color:#fff;background-color:#20a0ff}.xlsx-button.button-large{padding:10px 15px;font-size:14px}.xlsx-button.button-primary{color:#1f2d3d;border:1px solid #bfcbd9;background-color:#fff}", ""]);
 
 // exports
 
@@ -2698,7 +2702,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "vue-xlsx-container"
   }, [_c('button', {
-    staticClass: "xlsx-button",
+    class: _vm.className,
     attrs: {
       "type": "button"
     },
@@ -2706,9 +2710,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "click": _vm.handleUploadBtnClick
     }
   }, [_vm._t("default")], 2), _vm._v(" "), _c('input', {
+    ref: _vm.uploadInputId,
     staticClass: "c-hide",
     attrs: {
-      "id": _vm.uploadInputId,
       "type": "file",
       "accept": _vm.accept
     },
