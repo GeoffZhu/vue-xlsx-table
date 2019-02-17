@@ -1,9 +1,9 @@
 <template>
   <div class="vue-xlsx-container">
-    <button type="button" class="xlsx-button" @click="handleUploadBtnClick">
+    <button type="button" :class="className" @click="handleUploadBtnClick">
       <slot></slot>
     </button>
-    <input :id="uploadInputId" type="file" :accept="accept" class="c-hide" @change="handkeFileChange">
+    <input :ref="uploadInputId" type="file" :accept="accept" class="c-hide" @change="handkeFileChange">
   </div>
 </template>
 
@@ -137,10 +137,10 @@ export default {
     },
     handleUploadBtnClick () {
       this.clearAllData()
-      document.getElementById(this.uploadInputId).click()
+      this.$refs[this.uploadInputId].click()
     },
     clearAllData () {
-      document.getElementById(this.uploadInputId).value = null
+      this.$refs[this.uploadInputId].value = null
       this.tableData = {
         header: [],
         body: []
