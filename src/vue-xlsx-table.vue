@@ -27,6 +27,10 @@ export default {
     accept: {
       type: String,
       default: '.xlsx, .xls'
+    },
+    className: {
+      type: String,
+      default: 'xlsx-button'
     }
   },
   computed: {
