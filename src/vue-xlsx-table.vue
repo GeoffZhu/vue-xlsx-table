@@ -20,7 +20,7 @@ export default {
         header: [],
         body: []
       },
-      uploadInputId: (new Date().getUTCMilliseconds())
+      uploadInputId: new Date().getUTCMilliseconds()
     }
   },
   props: {
