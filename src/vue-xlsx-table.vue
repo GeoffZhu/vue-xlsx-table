@@ -49,6 +49,7 @@ export default {
           )
         })
         .catch((err) => {
+          this.$emit('on-select-file', false)
           console.error(err)
         })
     },
