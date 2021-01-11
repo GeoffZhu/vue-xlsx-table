@@ -1948,11 +1948,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'vue-xlsx-table',
+  name: "vue-xlsx-table",
+
   data: function data() {
     return {
       rawFile: null,
@@ -1965,39 +1977,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
+
   props: {
     accept: {
       type: String,
-      default: '.xlsx, .xls'
+      default: ".xlsx, .xls"
     },
-    className: {
+
+    buttonClassName: {
       type: String,
-      default: 'xlsx-button'
+      default: "xlsx-button"
     }
   },
+
   computed: {
     rABS: function rABS() {
       return window.xlsxEventBus.XLSX_EVENTS_DATA.options.rABS;
     }
   },
-  methods: {
-    handkeFileChange: function handkeFileChange(e) {
-      var _this = this;
 
-      if (this.rawFile !== null) {
-        return;
-      }
-      this.rawFile = e.target.files[0];
-      this.fileConvertToWorkbook(this.rawFile).then(function (workbook) {
+  methods: {
+    handkeFileChange: async function handkeFileChange(e) {
+      try {
+        if (this.rawFile !== null) {
+          return;
+        }
+        this.rawFile = e.target.files[0];
+
+        var workbook = await this.fileConvertToWorkbook(this.rawFile);
         var xlsxArr = __WEBPACK_IMPORTED_MODULE_0_xlsx___default.a.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
-        _this.workbook = workbook;
-        _this.initTable(_this.xlsxArrToTableArr(xlsxArr));
-      }).catch(function (err) {
+        this.workbook = workbook;
+        this.initTable(this.xlsxArrToTableArr(xlsxArr));
+      } catch (err) {
+        this.$emit("on-select-file", false);
         console.error(err);
-      });
+      }
     },
     fileConvertToWorkbook: function fileConvertToWorkbook(file) {
-      var _this2 = this;
+      var _this = this;
 
       var reader = new FileReader();
       var fixdata = function fixdata(data) {
@@ -2014,19 +2031,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         try {
           reader.onload = function (renderEvent) {
             var data = renderEvent.target.result;
-            if (_this2.rABS) {
+            if (_this.rABS) {
               /* if binary string, read with type 'binary' */
-              resolve(__WEBPACK_IMPORTED_MODULE_0_xlsx___default.a.read(data, { type: 'binary' }));
+              resolve(__WEBPACK_IMPORTED_MODULE_0_xlsx___default.a.read(data, { type: "binary" }));
             } else {
               /* if array buffer, convert to base64 */
               var arr = fixdata(data);
-              resolve(__WEBPACK_IMPORTED_MODULE_0_xlsx___default.a.read(btoa(arr), { type: 'base64' }));
+              resolve(__WEBPACK_IMPORTED_MODULE_0_xlsx___default.a.read(btoa(arr), { type: "base64" }));
             }
           };
           reader.onerror = function (error) {
             reject(error);
           };
-          if (_this2.rABS) {
+          if (_this.rABS) {
             reader.readAsBinaryString(file);
           } else {
             reader.readAsArrayBuffer(file);
@@ -2053,7 +2070,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       xlsxArr.forEach(function (item) {
         rowItem = {};
         for (var i = 0; i < maxLength; i++) {
-          rowItem[tableHeader[i]] = item[tableHeader[i]] || '';
+          rowItem[tableHeader[i]] = item[tableHeader[i]] || "";
         }
         tableArr.push(rowItem);
       });
@@ -2083,7 +2100,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.tableData.header = header;
       this.tableData.body = data;
-      this.$emit('on-select-file', this.tableData);
+      this.$emit("on-select-file", this.tableData);
     },
     handleUploadBtnClick: function handleUploadBtnClick() {
       this.clearAllData();
@@ -2122,10 +2139,12 @@ function install(Vue) {
   if (version !== '2') {
     console.error('For Vue.js 2, Version not support.');
   }
+
   var inBrowser = typeof window !== 'undefined';
   var DEFAULT_OPTION = {
     rABS: false
   };
+
   var xlsx = {
     $vm: null,
     bindEventBus: function bindEventBus(vm) {
@@ -2702,7 +2721,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "vue-xlsx-container"
   }, [_c('button', {
-    class: _vm.className,
+    class: _vm.buttonClassName,
     attrs: {
       "type": "button"
     },
