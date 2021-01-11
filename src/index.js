@@ -7,11 +7,13 @@ function install (Vue, options = {}) {
   if (version !== '2') {
     console.error('For Vue.js 2, Version not support.')
   }
+  
   const inBrowser = typeof window !== 'undefined'
   const DEFAULT_OPTION = {
     rABS: false
   }
-  let xlsx = {
+
+  const xlsx = {
     $vm: null,
     bindEventBus (vm) {
       this.$vm = vm

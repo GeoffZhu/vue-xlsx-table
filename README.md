@@ -1,3 +1,5 @@
+Forked from [https://github.com/GeoffZhu/vue-xlsx-table](https://github.com/GeoffZhu/vue-xlsx-table)
+
 # vue-xlsx-table
 
 > Not need upload, view xlsx or xls file in your browser, Supported by [js-xlsx](https://github.com/SheetJS/js-xlsx).
